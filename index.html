@@ -28,6 +28,7 @@
              :style="monsterHealthBarStyles"></div>
       </div>
     </section>
+
     <section id="player"
              class="container">
       <h2>Your Health</h2>
@@ -36,12 +37,16 @@
              :style="playerHealthBarStyles"></div>
       </div>
     </section>
+
+
     <section id="controls">
       <button @click="attackMonster">ATTACK</button>
-      <button>SPECIAL ATTACK</button>
-      <button>HEAL</button>
+      <button @click="specialAttackMonster"
+              :disabled="specialAttackIsActive">SPECIAL ATTACK</button>
+      <button @click="healPlayer">HEAL</button>
       <button>SURRENDER</button>
     </section>
+
     <section id="log"
              class="container">
       <h2>Battle Log</h2>
