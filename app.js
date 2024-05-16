@@ -4,8 +4,11 @@ const app = Vue.createApp({
       playerHealth: 100,
       monsterHealth: 100,
       currentRound: 0,
+      winner: null,
+      logMessages: [],
     };
   },
+
   computed: {
     monsterHealthBarStyles() {
       return this.getHealthBarStyles(this.monsterHealth);
@@ -19,23 +22,33 @@ const app = Vue.createApp({
       return this.currentRound % 3 !== 0;
     },
   },
+
   watch: {
     playerHealth(value) {
       if (value <= 0 && this.monsterHealth <= 0) {
-        alert("Draw!");
+        this.winner = "draw";
       } else if (value <= 0) {
-        alert("You lose!");
+        this.winner = "monster";
       }
     },
     monsterHealth(value) {
       if (value <= 0 && this.playerHealth <= 0) {
-        alert("Draw!");
+        this.winner = "draw";
       } else if (value <= 0) {
-        alert("You win!");
+        this.winner = "player";
       }
     },
   },
+
   methods: {
+    restartGame() {
+      this.playerHealth = 100;
+      this.monsterHealth = 100;
+      this.currentRound = 0;
+      this.winner = null;
+      this.logMessages = [];
+    },
+
     attackMonster() {
       this.currentRound++;
       const attackValue = this.getRandomValue(5, 12);
@@ -76,6 +89,14 @@ const app = Vue.createApp({
         this.playerHealth += healValue;
       }
       this.attackPlayer();
+    },
+
+    surrender() {
+      this.winner = "monster";
+    },
+
+    addLogMessage(actor, action, value) {
+      this.logMessages.unshift({ actor, action, value });
     },
 
     getHealthBarStyles(health) {
