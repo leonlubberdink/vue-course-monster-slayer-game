@@ -60,7 +60,18 @@
     <section id="log"
              class="container">
       <h2>Battle Log</h2>
-      <ul></ul>
+      <ul>
+        <li v-for="message in logMessages">
+          <span :class="{'log--player': message.actor === 'player', 'log--monster': message.actor === 'monster'}">{{
+            message.actor === 'player' ?
+            'Player ' : 'Monster '
+            }}</span>
+          <span v-if="message.action === 'heal'">heals himself for <span class="log--heal">{{ message.value }}
+            </span> points</span>
+          <span v-else>attacks and deals <span class="log--damage">{{ message.value }}
+            </span> damage</span>
+        </li>
+      </ul>
     </section>
   </div>
 </body>

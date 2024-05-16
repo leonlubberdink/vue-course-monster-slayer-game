@@ -57,6 +57,7 @@ const app = Vue.createApp({
       } else {
         this.monsterHealth -= attackValue;
       }
+      this.addLogMessage("player", "attack", attackValue);
       this.attackPlayer();
     },
 
@@ -67,6 +68,7 @@ const app = Vue.createApp({
       } else {
         this.playerHealth -= attackValue;
       }
+      this.addLogMessage("monster", "attack", attackValue);
     },
 
     specialAttackMonster() {
@@ -77,6 +79,7 @@ const app = Vue.createApp({
       } else {
         this.monsterHealth -= attackValue;
       }
+      this.addLogMessage("player", "attack", attackValue);
       this.attackPlayer();
     },
 
@@ -88,6 +91,7 @@ const app = Vue.createApp({
       } else {
         this.playerHealth += healValue;
       }
+      this.addLogMessage("player", "heal", healValue);
       this.attackPlayer();
     },
 
